@@ -5,12 +5,15 @@ import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "http
 
 // ১. এখানে আপনার Firebase Config বসানো হলো
 const firebaseConfig = {
-    apiKey: "AIzaSyDkwówaAQUF7Dauhnapl3dZ1ebekSQsXA4",
-    authDomain: "my-library-d68b9.firebaseapp.com",
-    projectId: "my-library-d68b9",
-    storageBucket: "my-library-d68b9.firebasestorage.app",
-    messagingSenderId: "1074260011498",
-    appId: "1:1074260011498:web:f2698572b95a7f4fc1aa93"
+
+  apiKey: "AIzaSyDkw6wAQOUf7DauHnapl3dZ1ebeKSQsXA4",
+  authDomain: "my-library-d68b9.firebaseapp.com",
+  projectId: "my-library-d68b9",
+  storageBucket: "my-library-d68b9.firebasestorage.app",
+  messagingSenderId: "1074260011498",
+  appId: "1:1074260011498:web:f2698572b95a7f4fc1aa93",
+  measurementId: "G-Q1JF5YH4XB"
+
 };
 
 // ২. এখানে আপনার অ্যাডমিন ইমেইল দিন (YOUR_ADMIN_EMAIL-এর জায়গায় আপনার আসল জিমেইল লিখবেন)
