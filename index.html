@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My E-Library App</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1e293b">
+    <!-- PDF.js Library for Secure Rendering -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+</head>
+<body oncontextmenu="return false;">
+
+    <!-- Authentication Section (Login / Signup) -->
+    <div id="auth-container" class="auth-wrapper">
+        <div class="auth-box">
+            <h2 id="auth-title">ই-লাইব্রেরিতে লগইন করুন</h2>
+            <input type="email" id="email" placeholder="আপনার ইমেইল দিন" required>
+            <input type="password" id="password" placeholder="পাসওয়ার্ড দিন (কমপক্ষে ৬ অক্ষর)" required>
+            <button id="auth-btn" onclick="handleAuth()">লগইন করুন</button>
+            <p id="auth-toggle" onclick="toggleAuthMode()">অ্যাকাউন্ট নেই? নতুন অ্যাকাউন্ট খুলুন</p>
+            <p id="auth-error" class="error-text"></p>
+        </div>
+    </div>
+
+    <!-- Main App Section -->
+    <div id="app-container" style="display: none;">
+        
+        <!-- Top Navbar -->
+        <nav class="navbar">
+            <div class="logo">📚 আমার লাইব্রেরি</div>
+            <div class="nav-links">
+                <button onclick="filterBooks('all')" class="nav-btn active" id="nav-all">সব বই</button>
+                
+                <select id="subject-filter" onchange="filterByDropdown('subject')" class="nav-select">
+                    <option value="">সব সাবজেক্ট</option>
+                </select>
+
+                <select id="author-filter" onchange="filterByDropdown('author')" class="nav-select">
+                    <option value="">সব লেখক</option>
+                </select>
+
+                <!-- Admin Button (Only visible to Admin) -->
+                <button id="admin-panel-btn" onclick="toggleAdminModal()" class="admin-btn" style="display: none;">+ বই আপলোড</button>
+                
+                <!-- Install App Button (PWA) -->
+                <button id="install-btn" class="install-btn" style="display: none;">অ্যাপ ডাউনলোড</button>
+                
+                <button onclick="logout()" class="logout-btn">লগআউট</button>
+            </div>
+        </nav>
+
+        <!-- Books Grid -->
+        <main class="main-content">
+            <h3 id="section-title">সকল বইসমূহ</h3>
+            <div id="books-grid" class="books-grid">
+                <!-- Books will load here dynamically -->
+            </div>
+        </main>
+
+        <!-- Admin Upload Modal -->
+        <div id="admin-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close-btn" onclick="toggleAdminModal()">&times;</span>
+                <h3>নতুন বই আপলোড করুন (Admin)</h3>
+                <input type="text" id="book-title" placeholder="বইয়ের নাম" required>
+                <input type="text" id="book-author" placeholder="লেখকের নাম" required>
+                <input type="text" id="book-subject" placeholder="সাবজেক্ট / ক্যাটাগরি" required>
+                <label class="file-label">PDF ফাইল সিলেক্ট করুন:</label>
+                <input type="file" id="book-pdf" accept="application/pdf" required>
+                <button id="upload-btn" onclick="uploadBook()">আপলোড করুন</button>
+                <p id="upload-status"></p>
+            </div>
+        </div>
+
+        <!-- Secure PDF Reader Modal -->
+        <div id="reader-modal" class="reader-modal" style="display: none;">
+            <div class="reader-header">
+                <span id="reading-book-title">বইয়ের নাম</span>
+                <div class="reader-controls">
+                    <button onclick="prevPage()">◀ আগের পাতা</button>
+                    <span id="page-info">পাতা: 1 / 1</span>
+                    <button onclick="nextPage()">পরের পাতা ▶</button>
+                    <button onclick="closeReader()" class="close-reader-btn">বন্ধ করুন ✖</button>
+                </div>
+            </div>
+            <div class="reader-body" id="reader-body">
+                <canvas id="pdf-canvas"></canvas>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script type="module" src="app.js"></script>
+</body>
+</html>
